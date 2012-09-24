@@ -31,4 +31,25 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	<servlet>
+		<description></description>
+		<display-name>HelloXSLT</display-name>
+		<servlet-name>HelloXSLT</servlet-name>
+		<servlet-class>helloWorld.controllers.HelloXSLT</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>Transformer</display-name>
+		<servlet-name>Transformer</servlet-name>
+		<servlet-class>helloWorld.controllers.Transformer</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HelloXSLT</servlet-name>
+		<url-pattern>/HelloXSLT</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Transformer</servlet-name>
+		<url-pattern>/Transformer</url-pattern>
+	</servlet-mapping>
 </web-app>

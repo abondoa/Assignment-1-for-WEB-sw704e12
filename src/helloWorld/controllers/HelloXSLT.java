@@ -13,12 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jdom2.JDOMException;
 
+import org.jdom2.Document;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 /**
  * Servlet implementation class Hello
  */
-public class Hello extends HttpServlet 
+public class HelloXSLT extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
 	private helloWorld.model.Hello model;
@@ -27,8 +29,7 @@ public class Hello extends HttpServlet
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Hello() {
-        super();
+    public HelloXSLT() {
         model = new helloWorld.model.Hello();
 		repo = new CourseRepository();
     }
@@ -37,11 +38,16 @@ public class Hello extends HttpServlet
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("title", "Hello World Title");
-		request.setAttribute("message", model.getMessage());
-	    RequestDispatcher view = request.getRequestDispatcher("/HelloView.jsp");
-		request.setAttribute("courses",repo.getCourses());
-	    view.forward(request, response);
+		Document doc = repo.exportToXMLDocument();
+		try {
+			// We use classic output format with getPrettyFormat()
+			XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+			response.getOutputStream().println("<?xml-stylesheet type=\"text/xsl\" href=\"Transformer\"?>");
+			xmlOutputter.output(doc, response.getOutputStream());
+			}
+		catch (java.io.IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
