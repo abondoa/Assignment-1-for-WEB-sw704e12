@@ -38,6 +38,12 @@
 		<servlet-class>helloWorld.controllers.HelloXSLT</servlet-class>
 	</servlet>
 	<servlet>
+		<description></description>
+		<display-name>GetRdf</display-name>
+		<servlet-name>GetRdf</servlet-name>
+		<servlet-class>helloWorld.controllers.GetRdf</servlet-class>
+	</servlet>
+	<servlet>
 		<description>
 		</description>
 		<display-name>Transformer</display-name>
@@ -51,5 +57,9 @@
 	<servlet-mapping>
 		<servlet-name>Transformer</servlet-name>
 		<url-pattern>/Transformer</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetRdf</servlet-name>
+		<url-pattern>/GetRdf</url-pattern>
 	</servlet-mapping>
 </web-app>
