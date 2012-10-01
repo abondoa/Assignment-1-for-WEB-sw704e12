@@ -1,3 +1,4 @@
+
 package helloWorld.controllers;
 
 import helloWorld.model.Course;
@@ -42,8 +43,9 @@ public class HelloXSLT extends HttpServlet
 		try {
 			// We use classic output format with getPrettyFormat()
 			XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+			response.getOutputStream().println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			response.getOutputStream().println("<?xml-stylesheet type=\"text/xsl\" href=\"Transformer\"?>");
-			xmlOutputter.output(doc, response.getOutputStream());
+			xmlOutputter.output(doc.getRootElement(), response.getOutputStream());
 			}
 		catch (java.io.IOException e) {
 			e.printStackTrace();

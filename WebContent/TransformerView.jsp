@@ -15,7 +15,7 @@
 </xsl:template>
 <xsl:template name="sections" match="sections">
 <H3>Sections</H3>
-<p><xsl:value-of select="section"/></p>
+<p><xsl:apply-templates select="section"/></p>
 </xsl:template>
 <xsl:template name="section" match="section">
 <H4><xsl:value-of select="@id"/></H4>
