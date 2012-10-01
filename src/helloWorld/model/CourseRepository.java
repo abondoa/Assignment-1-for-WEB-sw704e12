@@ -22,7 +22,7 @@ public class CourseRepository {
 	public CourseRepository() {
 		sax = new SAXBuilder();
 		try {
-			document = sax.build(new File("C:/Documents and Settings/aba.ABANOTE/My Documents/7. sem/WEB/assingment 2/uwm.xml"));
+			document = sax.build(new File("C:\\uwm.xml"));
 		} catch (JDOMException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

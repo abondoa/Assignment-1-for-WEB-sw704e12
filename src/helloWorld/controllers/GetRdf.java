@@ -1,3 +1,4 @@
+
 package helloWorld.controllers;
 
 import helloWorld.model.Course;
@@ -13,41 +14,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import org.jdom2.Document;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
 /**
- * Servlet implementation class Hello
+ * Servlet implementation class GetRdf
  */
-public class HelloXSLT extends HttpServlet 
+public class GetRdf extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-	private helloWorld.model.Hello model;
-	private helloWorld.model.CourseRepository repo;
-       
+	private helloWorld.model.Rdf model;
+	     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HelloXSLT() {
-        model = new helloWorld.model.Hello();
-		repo = new CourseRepository();
+    public GetRdf() {
+        super();
+        model = new helloWorld.model.Rdf();
+		model.loadFromXml();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Document doc = repo.exportToXMLDocument();
-		try {
-			// We use classic output format with getPrettyFormat()
-			XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
-			response.getOutputStream().println("<?xml-stylesheet type=\"text/xsl\" href=\"Transformer\"?>");
-			xmlOutputter.output(doc, response.getOutputStream());
-			}
-		catch (java.io.IOException e) {
-			e.printStackTrace();
-		}
+		request.setAttribute("rdf", model.getRdf());
+		//request.setAttribute("message", model.getMessage());
+	    RequestDispatcher view = request.getRequestDispatcher("/RdfView.jsp");
+	//	request.setAttribute("courses",repo.getCourses());
+	    view.forward(request, response);
 	}
 
 	/**
