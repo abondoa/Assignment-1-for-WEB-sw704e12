@@ -20,25 +20,32 @@ public class CourseRepository {
 	private Map<String,Course> map;
 	
 	public CourseRepository() {
-		sax = new SAXBuilder();
-		try {
-			document = sax.build(new File("C:\\uwm.xml"));
-		} catch (JDOMException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
+	}
+	
+	private void _load()
+	{
+		if(sax == null){
+			sax = new SAXBuilder();
+			try {
+				document = sax.build(new File("C:\\uwm.xml"));
+			} catch (JDOMException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			root = document.getRootElement();
+			map = new HashMap<String,Course>();
 		}
-		root = document.getRootElement();
-		map = new HashMap<String,Course>();
 	}
 	
 	public Course getCourse(String id) {
 		if(map.containsKey(id)) {
 			return map.get(id);
 		}
-		
+		_load();
 		for(Element courseElement : root.getChildren("course_listing")) {
 			if(!map.containsKey(courseElement.getChildText("course"))){
 				Course current = new Course(
@@ -61,6 +68,7 @@ public class CourseRepository {
 	}
 	
 	public Collection<Course> getCourses() {
+		_load();
 		for(Element courseElement : root.getChildren("course_listing")) {
 			if(!map.containsKey(courseElement.getChildText("course"))){
 				Course current = new Course(
@@ -80,6 +88,7 @@ public class CourseRepository {
 	}
 	
 	public Document exportToXMLDocument() {
+		_load();
 		Collection<Course> courses = getCourses();
 		Element root = new Element("course_list");
 		Document document = new Document(root);
@@ -114,6 +123,7 @@ public class CourseRepository {
 	}
 
 	private Collection<Section> parseSections(Element courseElement) {
+		
 		ArrayList<Section> result = new ArrayList<Section>();
 		for(Element sectionElement : courseElement.getChildren("section_listing")) {
 			Section current = new Section(

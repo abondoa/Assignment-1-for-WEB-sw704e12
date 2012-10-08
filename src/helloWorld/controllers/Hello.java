@@ -3,6 +3,7 @@ package helloWorld.controllers;
 
 import helloWorld.model.Course;
 import helloWorld.model.CourseRepository;
+import helloWorld.viewModel.HelloViewHelper;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,10 +37,10 @@ public class Hello extends HttpServlet
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("title", "Hello World Title");
-		request.setAttribute("message", model.getMessage());
+		
 	    RequestDispatcher view = request.getRequestDispatcher("/HelloView.jsp");
-		request.setAttribute("courses",repo.getCourses());
+
+		request.setAttribute("helper",new HelloViewHelper(model, repo));
 	    view.forward(request, response);
 	}
 
