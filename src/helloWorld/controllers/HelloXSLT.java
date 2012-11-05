@@ -4,6 +4,14 @@ package helloWorld.controllers;
 import helloWorld.model.CourseRepository;
 
 import java.io.IOException;
+import helloWorld.model.Course;
+import helloWorld.model.CourseRepository;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collection;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,17 +23,19 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 /**
  * implementation class Hello
+ * Servlet implementation class Hello
  */
 public class HelloXSLT extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
+	private helloWorld.model.Hello model;
 	private helloWorld.model.CourseRepository repo;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public HelloXSLT() {
-        new helloWorld.model.Hello();
+        model = new helloWorld.model.Hello();
 		repo = new CourseRepository();
     }
 

@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Stack;
+
 import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -59,6 +60,9 @@ public class CourseRepository {
 		Stack<Course> backtracker = new Stack<Course>();
 		boolean found = false;
 		
+		if(map.containsKey(id)) {
+			return map.get(id);
+		}
 		for(Element courseElement : root.getChildren("course_listing")) {
 			if(!map.containsKey(courseElement.getChildText("course"))){
 				Course current = new Course(
