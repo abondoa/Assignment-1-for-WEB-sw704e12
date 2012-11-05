@@ -33,4 +33,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>log4j</name>
+			<type>2</type>
+			<location>C:/Documents and Settings/aba.ABANOTE/workspace/apache-log4j-1.2.17</location>
+		</link>
+	</linkedResources>
 </projectDescription>

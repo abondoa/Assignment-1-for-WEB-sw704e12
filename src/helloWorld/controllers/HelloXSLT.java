@@ -2,30 +2,30 @@
 package helloWorld.controllers;
 
 import helloWorld.model.CourseRepository;
-import helloWorld.viewModel.HelloViewHelper;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import org.jdom2.Document;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 /**
- * Servlet implementation class Hello
+ * implementation class Hello
  */
-public class Hello extends HttpServlet 
+public class HelloXSLT extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-	private helloWorld.model.Hello model;
 	private helloWorld.model.CourseRepository repo;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Hello() {
-        super();
-        model = new helloWorld.model.Hello();
+    public HelloXSLT() {
+        new helloWorld.model.Hello();
 		repo = new CourseRepository();
     }
 
@@ -33,11 +33,17 @@ public class Hello extends HttpServlet
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	    RequestDispatcher view = request.getRequestDispatcher("/HelloView.jsp");
-
-		request.setAttribute("helper",new HelloViewHelper(model, repo));
-	    view.forward(request, response);
+		Document doc = repo.exportToXMLDocument();
+		try {
+			// We use classic output format with getPrettyFormat()
+			XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+			response.getOutputStream().println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+			response.getOutputStream().println("<?xml-stylesheet type=\"text/xsl\" href=\"Transformer\"?>");
+			xmlOutputter.output(doc.getRootElement(), response.getOutputStream());
+			}
+		catch (java.io.IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

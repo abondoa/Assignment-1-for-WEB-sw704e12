@@ -1,10 +1,7 @@
-
 package helloWorld.controllers;
 
-import helloWorld.model.CourseRepository;
-import helloWorld.viewModel.HelloViewHelper;
-
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,31 +9,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Hello
+ * Servlet implementation class Transformer
  */
-public class Hello extends HttpServlet 
-{
+public class Transformer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private helloWorld.model.Hello model;
-	private helloWorld.model.CourseRepository repo;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Hello() {
+    public Transformer() {
         super();
-        model = new helloWorld.model.Hello();
-		repo = new CourseRepository();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	    RequestDispatcher view = request.getRequestDispatcher("/HelloView.jsp");
-
-		request.setAttribute("helper",new HelloViewHelper(model, repo));
+		response.setContentType("text/xsl");
+	    RequestDispatcher view = request.getRequestDispatcher("/TransformerView.jsp");
 	    view.forward(request, response);
 	}
 

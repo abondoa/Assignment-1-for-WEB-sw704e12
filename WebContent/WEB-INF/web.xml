@@ -31,4 +31,46 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	<servlet>
+		<description></description>
+		<display-name>HelloXSLT</display-name>
+		<servlet-name>HelloXSLT</servlet-name>
+		<servlet-class>helloWorld.controllers.HelloXSLT</servlet-class>
+	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>GetRdf</display-name>
+		<servlet-name>GetRdf</servlet-name>
+		<servlet-class>helloWorld.controllers.GetRdf</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>Transformer</display-name>
+		<servlet-name>Transformer</servlet-name>
+		<servlet-class>helloWorld.controllers.Transformer</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>SingleCourse</display-name>
+		<servlet-name>SingleCourse</servlet-name>
+		<servlet-class>helloWorld.controllers.SingleCourse</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HelloXSLT</servlet-name>
+		<url-pattern>/HelloXSLT</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Transformer</servlet-name>
+		<url-pattern>/Transformer</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetRdf</servlet-name>
+		<url-pattern>/GetRdf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SingleCourse</servlet-name>
+		<url-pattern>/SingleCourse</url-pattern>
+	</servlet-mapping>
 </web-app>
